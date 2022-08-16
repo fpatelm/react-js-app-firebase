@@ -1,4 +1,10 @@
-export const firebaseConfig = {
+import { initializeApp } from 'firebase/app';
+import { addDoc, collection, connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
+import { connectAuthEmulator, getAuth } from 'firebase/auth';
+import { connectStorageEmulator, getStorage } from 'firebase/storage';
+import { connectFunctionsEmulator, getFunctions } from 'firebase/functions';
+
+const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
@@ -8,3 +14,11 @@ export const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
+
+var app = initializeApp(firebaseConfig);
+var db = getFirestore(app);
+var auth = getAuth(app);
+var store = getStorage(app);
+var func = getFunctions(app);
+
+export {db, auth, store, func, app };
